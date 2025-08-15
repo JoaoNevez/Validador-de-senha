@@ -1,40 +1,51 @@
-# Gerador de Senhas Seguras
+🔐 Validador de Senhas Seguras
+Descrição
 
-Este é um projeto simples de **Gerador de Senhas Seguras** desenvolvido em **HTML, CSS e JavaScript**.  
-O objetivo é permitir que o usuário gere senhas aleatórias, seguras e personalizáveis diretamente no navegador.
+Aplicativo web simples que avalia a força de senhas digitadas pelo usuário. Mostra uma barra de força, fornece sugestões de melhoria e permite copiar a senha facilmente. Inclui dark mode para melhor experiência visual.
 
----
+Funcionalidades
 
-## Funcionalidades
+Avalia a senha quanto a:
 
-- Geração de senhas aleatórias
-- Opção de incluir letras maiúsculas, minúsculas, números e símbolos
-- Copiar senha gerada para a área de transferência
-- Interface responsiva e fácil de usar
-- Modo claro/escuro (opcional, se implementado)
+Tamanho mínimo (8 caracteres)
 
----
+Letras maiúsculas
 
-## Tecnologias Utilizadas
+Letras minúsculas
 
-- HTML5
-- CSS3
-- JavaScript (Vanilla)
+Números
 
----
+Símbolos especiais
 
-## Como Usar
+Sugestões dinâmicas para melhorar a senha.
 
-1. Abra o arquivo `index.html` em seu navegador.  
-2. Escolha as opções desejadas para a senha (como comprimento e tipos de caracteres).  
-3. Clique no botão **Gerar Senha**.  
-4. Copie a senha clicando no botão **Copiar**.
+Barra de força com cores que indicam a segurança da senha.
 
----
+Botão para copiar a senha.
 
-## Estrutura do Projeto
-gerador-de-senhas/
-│-- index.html
-│-- style.css
-│-- script.js
-│-- README.md
+Dark mode funcional.
+
+Tecnologias
+
+HTML
+
+CSS
+
+JavaScript
+
+Como usar
+
+Baixe ou clone o repositório.
+
+Abra o arquivo index.html no navegador.
+
+Digite sua senha no campo.
+
+Veja a força da senha, sugestões e copie se desejar.
+
+Clique no botão 🌙 para alternar Dark Mode.
+
+Demonstração
+
+O projeto funciona 100% no navegador, sem necessidade de backend.
+Você pode personalizar estilos, cores e critérios de avaliação facilmente.
