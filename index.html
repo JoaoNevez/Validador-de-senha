@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validador de Senhas Seguras</title>
+  <style>
+    :root {
+      --bg-color: #f5f5f5;
+      --text-color: #333;
+      --card-bg: #fff;
+      --primary-color: #007bff;
+      --danger-color: #ff4d4d;
+      --warning-color: #ffa64d;
+      --success-color: #33cc33;
+    }
+
+    body.dark {
+      --bg-color: #121212;
+      --text-color: #f5f5f5;
+      --card-bg: #1e1e1e;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      width: 400px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .barra-forca {
+      height: 12px;
+      border-radius: 6px;
+      background: #ccc;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .barra-forca > div {
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s;
+    }
+
+    .sugestoes {
+      text-align: left;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      background: var(--primary-color);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px 0;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    .toggle-dark {
+      cursor: pointer;
+      background: #444;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔐 Validador de Senhas</h2>
+
+    <input type="password" id="senha" placeholder="Digite sua senha">
+    <div class="barra-forca"><div id="forca"></div></div>
+    <div class="sugestoes" id="sugestoes"></div>
+
+    <button class="btn" onclick="copiarSenha()">Copiar Senha</button>
+    <button class="toggle-dark" onclick="toggleDark()">🌙 Dark Mode</button>
+  </div>
+
+  <script>
+    const senhaInput = document.getElementById('senha');
+    const barra = document.getElementById('forca');
+    const sugestoesEl = document.getElementById('sugestoes');
+
+    senhaInput.addEventListener('input', () => {
+      const senha = senhaInput.value;
+      avaliarSenha(senha);
+    });
+
+    function avaliarSenha(senha) {
+      let pontos = 0;
+      let sugestoes = [];
+
+      if (senha.length >= 8) pontos++; else sugestoes.push("Adicione pelo menos 8 caracteres.");
+      if (/[A-Z]/.test(senha)) pontos++; else sugestoes.push("Adicione letras maiúsculas.");
+      if (/[a-z]/.test(senha)) pontos++; else sugestoes.push("Adicione letras minúsculas.");
+      if (/[0-9]/.test(senha)) pontos++; else sugestoes.push("Adicione números.");
+      if (/[^A-Za-z0-9]/.test(senha)) pontos++; else sugestoes.push("Adicione símbolos especiais.");
+
+      const cores = ["#ff4d4d","#ffa64d","#ffff4d","#85e085","#33cc33"];
+      const porcentagem = (pontos / 5) * 100;
+      barra.style.width = porcentagem + "%";
+      barra.style.background = cores[pontos-1] || "#ccc";
+
+      if (senha.length === 0) {
+        barra.style.width = "0%";
+        sugestoesEl.innerHTML = "";
+      } else {
+        sugestoesEl.innerHTML = sugestoes.map(s => "• " + s).join("<br>");
+      }
+    }
+
+    function copiarSenha() {
+      const senha = senhaInput.value;
+      if (!senha) return alert("Digite uma senha primeiro!");
+      navigator.clipboard.writeText(senha)
+        .then(() => alert("Senha copiada!"))
+        .catch(() => alert("Erro ao copiar."));
+    }
+
+    function toggleDark() {
+      document.body.classList.toggle('dark');
+    }
+  </script>
+</body>
+</html>
